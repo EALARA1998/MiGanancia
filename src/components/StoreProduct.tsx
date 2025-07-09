@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react"
-import unitsJson from "../assets/data/units.json"
-
 type StoreProductProps = {
   product: Products
   productLS: ProductLocalStorage
-  HandleOnChangePhysicalUnit: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  HandleOnChangeStoreProductUnit: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  //HandleOnChangePhysicalUnit: (e: React.ChangeEvent<HTMLSelectElement>, setProductsLS: () => void) => void
+  setProductsLS: React.Dispatch<React.SetStateAction<ProductLocalStorage[]>>,
+  //HandleOnChangeStoreProductUnit: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  units: Units[]
 }
 type Products = {
+  id: number,
   name: string,
   img: string,
   physicalUnit: string[]
@@ -30,13 +30,7 @@ type Unit = {
   [ unitName: string ] : string
 }
 
-export default function StoreProduct( { product, productLS, HandleOnChangePhysicalUnit, HandleOnChangeStoreProductUnit }: StoreProductProps ) {
-
-  const [units, setUnits] = useState(unitsJson as unknown as Units[])
-  
-  useEffect(()=>{
-
-  },[])
+export default function StoreProduct( { product, productLS, setProductsLS, units }: StoreProductProps ) {
 
   return (
     <>
@@ -45,7 +39,14 @@ export default function StoreProduct( { product, productLS, HandleOnChangePhysic
       <img src={`/img/${product.img}`} alt={product.name} width={100} height={100} />
       <section>
         <h4>Physical Unit</h4>
-        <select name="physicalUnit" value={productLS.physicalUnit} onChange={HandleOnChangePhysicalUnit}>
+        <select name="physicalUnit" value={productLS.physicalUnit} onChange={(e)=>{
+          const newValue = e.target.value
+          setProductsLS(prev =>
+            prev.map(p =>
+              p.id === product.id ? { ...p, physicalUnit: newValue, storeProductUnit: "", productUnit: "" } : p
+            )
+          );
+        }}>
           <option value="">Please choose an option</option>
           {product.physicalUnit.map((unit, index) => (
             <option key={index} value={unit}>{unit}</option>
@@ -54,8 +55,21 @@ export default function StoreProduct( { product, productLS, HandleOnChangePhysic
       </section>
       <section>
         <h4>Quantity</h4>
-        <input type="text" />
-        <select name="unit" value={productLS.storeProductUnit} onChange={HandleOnChangeStoreProductUnit}>
+        <input type="text" value={productLS.storeProductQuantity} onChange={(e)=>{
+          const newValue = e.target.value
+          setProductsLS(prev =>
+            prev.map(p=>
+              p.id === product.id ? { ...p, storeProductQuantity: newValue } : p
+          ));
+        }}/>
+        <select name="unit" value={productLS.storeProductUnit} onChange={(e)=>{
+          const newValue = e.target.value
+          setProductsLS(prev =>
+            prev.map(p =>
+              p.id === product.id ? { ...p, storeProductUnit: newValue } : p
+            )
+          );
+        }}>
           <option value="">Please choose an option</option>
           { units.map( (e) => {
             if (e.name === productLS.physicalUnit) {
@@ -63,6 +77,16 @@ export default function StoreProduct( { product, productLS, HandleOnChangePhysic
             }
           }) }
         </select>
+      </section>
+      <section>
+        <h4>Price</h4>
+        <input type="text" value={productLS.price} onChange={(e)=>{
+            const newValue = e.target.value
+            setProductsLS(prev =>
+              prev.map(p=>
+                p.id === product.id ? { ...p, price: newValue } : p
+            ));
+          }}/>
       </section>
     </section>
     </>
