@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["globales/_globales.scss"],"names":[],"mappings":"AAAA;EACE","sourcesContent":["html{\r\n  font-family: 'Courier New', Courier, monospace;\r\n}"],"file":"app.css"}

@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Baking Powder",
+    "img": "baking_powder.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 2,
+    "name": "Baking Soda",
+    "img": "baking_soda.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 3,
+    "name": "Banana",
+    "img": "banana.png",
+    "physicalUnit": ["mass","unit"]
+  },
+  {
+    "id": 4,
+    "name": "Bottle",
+    "img": "bottle.png",
+    "physicalUnit": ["unit"]
+  },
+  {
+    "id": 5,
+    "name": "Butter",
+    "img": "butter.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 6,
+    "name": "Cheese",
+    "img": "cheese.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 7,
+    "name": "Cinnamon",
+    "img": "cinnamon.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 8,
+    "name": "Clear Bag",
+    "img": "clear_bag.png",
+    "physicalUnit": ["unit"]
+  },
+  {
+    "id": 9,
+    "name": "Egg",
+    "img": "egg.png",
+    "physicalUnit": ["unit","mass"]
+  },
+  {
+    "id": 10,
+    "name": "Flour",
+    "img": "flour.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 11,
+    "name": "Grape",
+    "img": "grape.png",
+    "physicalUnit": ["mass","unit"]
+  },
+  {
+    "id": 12,
+    "name": "Honey",
+    "img": "honey.svg",
+    "physicalUnit": ["volume","mass"]
+  },
+  {
+    "id": 13,
+    "name": "Lard",
+    "img": "lard.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 14,
+    "name": "Milk",
+    "img": "milk.png",
+    "physicalUnit": ["volume","mass"]
+  },
+  {
+    "id": 15,
+    "name": "Oil",
+    "img": "oil.png",
+    "physicalUnit": ["volume","mass"]
+  },
+  {
+    "id": 16,
+    "name": "Pineapple",
+    "img": "pineapple.png",
+    "physicalUnit": ["mass","unit"]
+  },
+  {
+    "id": 17,
+    "name": "Salt",
+    "img": "salt.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 18,
+    "name": "Strawberry",
+    "img": "strawberry.png",
+    "physicalUnit": ["mass","unit"]
+  },
+  {
+    "id": 19,
+    "name": "Sugar",
+    "img": "sugar.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 20,
+    "name": "Vanilla",
+    "img": "vanilla.png",
+    "physicalUnit": ["volume","mass"]
+  },
+  {
+    "id": 21,
+    "name": "Water",
+    "img": "water.png",
+    "physicalUnit": ["volume","mass"]
+  },
+  {
+    "id": 22,
+    "name": "Yeast",
+    "img": "yeast.png",
+    "physicalUnit": ["mass"]
+  }
+]
