@@ -55,8 +55,8 @@
   },
   {
     "id": 10,
-    "name": "Flour",
-    "img": "flour.png",
+    "name": "Wheat Flour",
+    "img": "wheat_flour.png",
     "physicalUnit": ["mass"]
   },
   {
@@ -129,6 +129,18 @@
     "id": 22,
     "name": "Yeast",
     "img": "yeast.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 23,
+    "name": "Corn Flour",
+    "img": "corn_flour.png",
+    "physicalUnit": ["mass"]
+  },
+  {
+    "id": 24,
+    "name": "Rice Flour",
+    "img": "rice_flour.png",
     "physicalUnit": ["mass"]
   }
 ]

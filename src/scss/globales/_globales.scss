@@ -1,3 +1,33 @@
-html{
+html {
   font-family: 'Courier New', Courier, monospace;
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-padding-top: 0rem;
+}
+input, select {
+  font-family: 'Courier New', Courier, monospace;
+}
+*, 
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+nav{
+  display: flex;
+  font-size: 2.5rem;
+  gap: 2rem;
+  justify-content: center;
+}
+h1{
+  font-size: 3rem;
+}
+h2{
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+h3{
+  font-size: 2rem;
+}
+h4{
+  font-size: 1.5rem;
 }

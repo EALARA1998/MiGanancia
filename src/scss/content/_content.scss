@@ -1,0 +1,82 @@
+@mixin product-card($hover-color) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: white;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: $hover-color;
+  }
+  h3 {
+    margin: 0;
+  }
+  &_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4 {
+      margin: 1rem 0 0.5rem 0;
+    }
+    div{
+      display: flex;
+    }
+    input, select {
+      text-align: center;
+    }
+  }
+}
+@mixin product-grid(){
+  display: grid;
+  grid-template-columns: repeat(6 , 1fr);
+  background-color: rgb(234,234,234);
+}
+.content{
+  h2{
+    text-align: center
+  }
+  &_store-prices{
+    &_store-products{
+      @include product-grid();
+      &_store-product{
+        @include product-card(rgb(199,242,215));
+      }
+    }
+  }
+  &_product-selection{
+    &_products{
+      @include product-grid();
+      &_product{
+        @include product-card(rgb(163,201,249));
+      }
+    }
+  }
+  &_cart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    table{
+      border-collapse: separate;
+      border-spacing: 3rem 0;
+      td, th{
+        text-align: center;
+      }
+      thead{
+        th{
+          font-size: 3rem;
+          text-transform: uppercase;
+        }
+      }
+      tbody{
+        td{
+          font-size: 2rem;
+        }
+      }
+    }
+    h3{
+      text-transform: uppercase;
+    }
+  }
+}

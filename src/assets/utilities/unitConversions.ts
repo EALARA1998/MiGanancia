@@ -23,7 +23,7 @@ type Unit = {
 
 const unitsJson = rawUnitsJson as unknown as PhysicalUnit[];
 
-export function Convert(category: DimensionName, value: number, fromUnit: string, toUnit:string): number {
+function Convert(category: string, value: number, fromUnit: string, toUnit:string): number {
   const unit = unitsJson.find(pU => pU.name === category);
   if (!unit) {
     throw new Error(`Category "${category}" not found`);
@@ -62,4 +62,5 @@ function ConvertTemperature(value: number, fromUnit: string, toUnit: string): nu
   }
   
 }
-console.log(Convert("temperature", 127, 'fahrenheit', 'kelvin'));
+export { Convert }
+//console.log(Convert("temperature", 127, 'fahrenheit', 'kelvin'));
