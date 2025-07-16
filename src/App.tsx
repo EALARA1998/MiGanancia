@@ -13,26 +13,55 @@ export default function App() {
   const [products, setProducts] = useState(productsJson as unknown as Products[])
   const [units, setUnits] = useState(unitsJson as unknown as Units[])
   
-  function InitialProductLS() {
-    const localStorageProductLS = localStorage.getItem("productLS")
-    if (!localStorageProductLS) {
-      return (products.map((product)=>{
-        return { 
-          id: product.id,
-          name: product.name,
-          img: product.img,
-          physicalUnit: "",
-          storeProductQuantity: "",
-          storeProductUnit: "",
-          price: "",
-          productQuantity: "",
-          productUnit: ""
-        }
-      }))
-    }else{
-      return JSON.parse(localStorageProductLS)
-    }
+function InitialProductLS() {
+  const localStorageProductLS = localStorage.getItem("productLS");
+
+  if (!localStorageProductLS) {
+    return products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      img: product.img,
+      physicalUnit: "",
+      storeProductQuantity: "",
+      storeProductUnit: "",
+      price: "",
+      productQuantity: "",
+      productUnit: ""
+    }));
   }
+
+  const productsLS: ProductLocalStorage[] = JSON.parse(localStorageProductLS);
+
+  // Crear un Map para buscar más fácilmente por id
+  const productsLSMap = new Map(productsLS.map(p => [p.id, p]));
+
+  const mergedProducts = products.map(product => {
+    const storedProduct = productsLSMap.get(product.id);
+    if (storedProduct) {
+      // Si existe en LS, actualiza su nombre o imagen si han cambiado
+      return {
+        ...storedProduct,
+        name: product.name,
+        img: product.img
+      };
+    } else {
+      // Si es nuevo, inicialízalo
+      return {
+        id: product.id,
+        name: product.name,
+        img: product.img,
+        physicalUnit: "",
+        storeProductQuantity: "",
+        storeProductUnit: "",
+        price: "",
+        productQuantity: "",
+        productUnit: ""
+      };
+    }
+  });
+
+  return mergedProducts;
+}
   const [productsLS, setProductsLS] = useState(InitialProductLS() as ProductLocalStorage[])
   useEffect(()=>{
     localStorage.setItem("productLS", JSON.stringify(productsLS))
@@ -65,7 +94,6 @@ export default function App() {
   const [fuel, setFuel] = useState(InitialFuel() as Fuel)
   useEffect(()=>{
     localStorage.setItem("fuel", JSON.stringify(fuel))
-    console.log(fuel)
   },[fuel])
   
   
