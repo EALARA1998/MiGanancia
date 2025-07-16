@@ -7,9 +7,10 @@ type ProductSelectionProp = {
   units: Units[]
   cart: CartItemType[]
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>,
+  summary: Summary
 }
 
-export default function ProductSelection( {products, productsLS, setProductsLS, units, cart, setCart} : ProductSelectionProp ) {
+export default function ProductSelection( {products, productsLS, setProductsLS, units, cart, setCart, summary} : ProductSelectionProp ) {
   return (
     <>
       <section className="content_product-selection">
@@ -26,6 +27,7 @@ export default function ProductSelection( {products, productsLS, setProductsLS, 
               units={units}
               setCart={setCart}
               cart={cart}
+              summary={summary}
             ></Product>
           })}
         </section>

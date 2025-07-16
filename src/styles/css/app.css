@@ -23,20 +23,28 @@ nav {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 h2 {
   text-transform: uppercase;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 h4 {
   font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+input {
+  height: 2rem;
 }
 
 .content h2 {
@@ -113,24 +121,56 @@ h4 {
   text-align: center;
 }
 .content_cart {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 0 5rem;
+}
+.content_cart_items {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.content_cart table {
+.content_cart_items_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content_cart_items_section_multiplier {
+  display: flex;
+  gap: 0 2rem;
+  align-items: center;
+}
+.content_cart_items_section table {
   border-collapse: separate;
   border-spacing: 3rem 0;
 }
-.content_cart table td, .content_cart table th {
+.content_cart_items_section table td, .content_cart_items_section table th {
   text-align: center;
 }
-.content_cart table thead th {
+.content_cart_items_section table thead th {
   font-size: 3rem;
   text-transform: uppercase;
 }
-.content_cart table tbody td {
+.content_cart_items_section table tbody td {
   font-size: 2rem;
 }
-.content_cart h3 {
+.content_cart_items_section h3 {
   text-transform: uppercase;
+}
+.content_cart_summary {
+  display: flex;
+  flex-direction: column;
+}
+.content_cart_summary_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.content_cart_summary_section input, .content_cart_summary_section p {
+  font-size: 3rem;
+}
+.content_cart_summary_section input {
+  height: 3.5rem;
+  text-align: center;
 }/*# sourceMappingURL=app.css.map */

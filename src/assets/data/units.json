@@ -163,5 +163,13 @@
     "units": {
       "unit": "1"
     }
+  },
+  {
+    "id": 13,
+    "name": "rateOfPowerChange",
+    "units": {
+      "kWh": "1",
+      "Wh": "1000"
+    }
   }
 ]

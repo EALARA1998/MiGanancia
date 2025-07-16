@@ -10,9 +10,10 @@ type ProductProps = {
   units: Units[]
   cart: CartItemType[]
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>
+  summary: Summary
 }
 
-export default function Product( { product, productLS, setProductsLS, units, cart, setCart }: ProductProps ) {
+export default function Product( { product, productLS, setProductsLS, units, cart, setCart, summary }: ProductProps ) {
   return (
     <>
       <section className="content_product-selection_products_product">
@@ -55,9 +56,9 @@ export default function Product( { product, productLS, setProductsLS, units, car
             return
           }
           const convertedProductQuantity = Convert(productLS.physicalUnit, Number.parseFloat(productLS.productQuantity), productLS.productUnit, productLS.storeProductUnit)
-          const newPrice = (Number.parseFloat(productLS.price)/Number.parseFloat(productLS.storeProductQuantity)*convertedProductQuantity).toFixed(3)
+          const newPrice = (Number.parseFloat(productLS.price)/Number.parseFloat(productLS.storeProductQuantity)*convertedProductQuantity)
           setCart(prev => {
-            return [...prev, { id: `${prev.length}`, num: `${prev.length+1}`, name: `${productLS.name}`, img: `${productLS.img}`, quantity: `${productLS.productQuantity}`, physicalUnit: productLS.physicalUnit, units: Object.entries(units.find(e => e.name === productLS.physicalUnit)?.units ?? []).map(([key]) => key), productUnit: productLS.productUnit, price: `${newPrice}`}]
+            return [...prev, { id: `${prev.length}`, num: `${prev.length+1}`, name: `${productLS.name}`, img: `${productLS.img}`, quantity: `${productLS.productQuantity}`, quantityMultiplied: `${Number.parseFloat(productLS.productQuantity)*Number.parseFloat(summary.multiplier)}`, physicalUnit: productLS.physicalUnit, units: Object.entries(units.find(e => e.name === productLS.physicalUnit)?.units ?? []).map(([key]) => key), productUnit: productLS.productUnit, price: `${newPrice}`, priceMultiplied: `${newPrice*Number.parseFloat(summary.multiplier)}`}]
           })
         }}>Add To Cart</button>
       </section>

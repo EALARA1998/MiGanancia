@@ -142,5 +142,23 @@
     "name": "Rice Flour",
     "img": "rice_flour.png",
     "physicalUnit": ["mass"]
+  },
+  {
+    "id": 25,
+    "name": "Coconut Oil",
+    "img": "coconut_oil.png",
+    "physicalUnit": ["mass","volume"]
+  },
+  {
+    "id": 26,
+    "name": "Coconut",
+    "img": "coconut.png",
+    "physicalUnit": ["mass","unit"]
+  },
+  {
+    "id": 27,
+    "name": "Coconut Milk",
+    "img": "coconut-milk.png",
+    "physicalUnit": ["mass","volume"]
   }
 ]
