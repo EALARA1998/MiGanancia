@@ -1,13 +1,10 @@
-type Products = {
+export type Products = {
   id: number,
   name: string,
   img: string,
   physicalUnit: string[]
 }
-type ProductLocalStorage = {
-  id: number,
-  name: string,
-  img: string
+export type ProductLocalStorage = Pick<Products, "id" | "name" | "img"> & {
   physicalUnit: string,
   storeProductQuantity: string,
   storeProductUnit: string,
@@ -15,11 +12,8 @@ type ProductLocalStorage = {
   productQuantity: string,
   productUnit: string,
 }
-type CartItemType = {
-  id: string,
+export type CartItemType = Pick<Products, "id" | "name" | "img"> & {
   num: string
-  name: string,
-  img: string,
   quantity: string
   quantityMultiplied: string
   physicalUnit: string
@@ -28,15 +22,15 @@ type CartItemType = {
   price: string
   priceMultiplied: string
 }
-type Units = {
+export type Units = {
   id: number
   name: string,
   units: Unit[]
 }
-type Unit = {
+export type Unit = {
   [ unitName: string ] : string
 }
-type Summary = {
+export type Summary = {
   multiplier: string
   totalItems: string
   quantityProduced: string
@@ -48,11 +42,11 @@ type Summary = {
   totalProfit: string
   totalSellingPrice: string
 }
-type Fuel = {
+export type Fuel = {
   powerConsumptionElectricity: string
   powerConsumptionElectricityUnit: string
-  priceElectricity: sting
-  priceElectricityUnit: sting
+  priceElectricity: string
+  priceElectricityUnit: string
   timeElectricity: string
   timeElectricityUnit: string
 }

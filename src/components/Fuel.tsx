@@ -1,3 +1,4 @@
+import type { Units, Fuel, CartItemType, Summary } from "../types"
 import { IsPositive } from "../assets/utilities/dataValidation"
 import { Convert } from "../assets/utilities/unitConversions"
 
@@ -11,12 +12,12 @@ type FuelProps = {
 export default function Fuel({units, fuel, setFuel, setCart, summary} : FuelProps) {
   return (
     <>
-      <section>
+      <section className="content_fuel">
         <h2>Fuel</h2>
-        <section>
+        <section className="content_fuel_electricity">
           <h3>Electricity</h3>
           <img src={`/img/electricity.png`} alt="electricity.png" width={100} height={100} />
-          <section>
+          <section className="content_fuel_electricity_section">
             <h4>Power Consumption</h4>
             <div>
               <input type="text" value={fuel.powerConsumptionElectricity} onChange={(e)=>{
@@ -40,7 +41,7 @@ export default function Fuel({units, fuel, setFuel, setCart, summary} : FuelProp
               </select>
             </div>
           </section>
-          <section>
+          <section className="content_fuel_electricity_section">
             <h4>Price</h4>
             <div>
               <input type="text" value={fuel.priceElectricity} onChange={(e)=>{
@@ -64,7 +65,7 @@ export default function Fuel({units, fuel, setFuel, setCart, summary} : FuelProp
               </select>
             </div>
           </section>
-          <section>
+          <section className="content_fuel_electricity_section">
             <h4>Time</h4>
             <div>
               <input type="text" value={fuel.timeElectricity} onChange={(e)=>{
@@ -98,7 +99,7 @@ export default function Fuel({units, fuel, setFuel, setCart, summary} : FuelProp
           const convertedTime = Convert("time", Number.parseFloat(fuel.timeElectricity), fuel.timeElectricityUnit, "h")
           const newPrice = (Number.parseFloat(fuel.priceElectricity)*Number.parseFloat(fuel.powerConsumptionElectricity)*convertedTime)
           setCart(prev => {
-            return [...prev, { id: `${prev.length}`, num: `${prev.length+1}`, name: `Electricity`, img: `electricity.png`, quantity: `${fuel.timeElectricity}`, quantityMultiplied: `${Number.parseFloat(fuel.timeElectricity)*Number.parseFloat(summary.multiplier)}`, physicalUnit: "time", units: Object.entries(units.find(e => e.name === "time")?.units ?? []).map(([key]) => key), productUnit: fuel.timeElectricityUnit, price: `${newPrice}`, priceMultiplied: `${newPrice*Number.parseFloat(summary.multiplier)}`}]
+            return [...prev, { id: prev.length, num: `${prev.length+1}`, name: `Electricity`, img: `electricity.png`, quantity: `${fuel.timeElectricity}`, quantityMultiplied: `${Number.parseFloat(fuel.timeElectricity)*Number.parseFloat(summary.multiplier)}`, physicalUnit: "time", units: Object.entries(units.find(e => e.name === "time")?.units ?? []).map(([key]) => key), productUnit: fuel.timeElectricityUnit, price: `${newPrice}`, priceMultiplied: `${newPrice*Number.parseFloat(summary.multiplier)}`}]
           })
         }}>Add To Cart</button>
         </section>

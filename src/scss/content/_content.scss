@@ -30,12 +30,43 @@
 }
 @mixin product-grid(){
   display: grid;
-  grid-template-columns: repeat(6 , 1fr);
+  grid-template-columns: repeat(5 , 1fr);
   background-color: rgb(234,234,234);
 }
 .content{
   h2{
     text-align: center
+  }
+  h3{
+    font-size: 3rem;
+  }
+  select{
+    font-weight: bold;
+  }
+  h4, input, select{
+    font-size: 2rem;
+  }
+  input, select, button{
+    height: 3rem;
+    text-align: center;
+  }
+  button{
+    width: 15rem;
+    margin: 1rem 0 0 0;
+    text-transform: uppercase;
+    font-weight: bold
+  }
+  .remove-button, .add-button{
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+  }
+  .remove-button{
+    background-color: rgba(197,58,61,255);
+  }
+  .add-button{
+    background-color: rgba(78,181,126,255);
   }
   &_store-prices{
     &_store-products{
@@ -50,6 +81,19 @@
       @include product-grid();
       &_product{
         @include product-card(rgb(163,201,249));
+      }
+    }
+  }
+  &_fuel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_electricity{
+      @include product-card(rgb(163,201,249));
+      &_section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
   }

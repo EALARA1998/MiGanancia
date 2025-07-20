@@ -1,3 +1,4 @@
+import type { CartItemType, Summary } from "../types";
 import { Convert } from "../assets/utilities/unitConversions"
 import { IsPositive, IsNumeric } from "../assets/utilities/dataValidation";
 
@@ -65,7 +66,7 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
                         </select>
                     </td>
                     <td>{Number.parseFloat(item.priceMultiplied).toFixed(3)}</td>
-                    <td><button onClick={()=>{
+                    <td><button className="remove-button" onClick={()=>{
                       setCart(prev => {
                         const filtered = prev.filter(e => e.id !== item.id)
                         const reindexed = filtered.map((e, i) => ({ ...e, num: `${i+1}` }))

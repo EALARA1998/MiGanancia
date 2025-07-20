@@ -1,4 +1,5 @@
 import Product from "./Product"
+import type { Products, ProductLocalStorage, Units, CartItemType, Summary } from "../types"
 
 type ProductSelectionProp = {
   products: Products[],

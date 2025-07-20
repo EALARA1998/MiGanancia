@@ -1,3 +1,4 @@
+import type { Products, ProductLocalStorage, Units, CartItemType, Summary } from "../types"
 import { IsPositive } from "../assets/utilities/dataValidation";
 import { Convert } from "../assets/utilities/unitConversions"
 
@@ -48,7 +49,7 @@ export default function Product( { product, productLS, setProductsLS, units, car
             </select>
           </div>
         </section>
-        <button onClick={()=>{
+        <button className="add-button" onClick={()=>{
           if (!productLS.physicalUnit||!productLS.storeProductUnit||!productLS.productUnit) {
             return
           }
@@ -58,7 +59,7 @@ export default function Product( { product, productLS, setProductsLS, units, car
           const convertedProductQuantity = Convert(productLS.physicalUnit, Number.parseFloat(productLS.productQuantity), productLS.productUnit, productLS.storeProductUnit)
           const newPrice = (Number.parseFloat(productLS.price)/Number.parseFloat(productLS.storeProductQuantity)*convertedProductQuantity)
           setCart(prev => {
-            return [...prev, { id: `${prev.length}`, num: `${prev.length+1}`, name: `${productLS.name}`, img: `${productLS.img}`, quantity: `${productLS.productQuantity}`, quantityMultiplied: `${Number.parseFloat(productLS.productQuantity)*Number.parseFloat(summary.multiplier)}`, physicalUnit: productLS.physicalUnit, units: Object.entries(units.find(e => e.name === productLS.physicalUnit)?.units ?? []).map(([key]) => key), productUnit: productLS.productUnit, price: `${newPrice}`, priceMultiplied: `${newPrice*Number.parseFloat(summary.multiplier)}`}]
+            return [...prev, { id: prev.length, num: `${prev.length+1}`, name: `${productLS.name}`, img: `${productLS.img}`, quantity: `${productLS.productQuantity}`, quantityMultiplied: `${Number.parseFloat(productLS.productQuantity)*Number.parseFloat(summary.multiplier)}`, physicalUnit: productLS.physicalUnit, units: Object.entries(units.find(e => e.name === productLS.physicalUnit)?.units ?? []).map(([key]) => key), productUnit: productLS.productUnit, price: `${newPrice}`, priceMultiplied: `${newPrice*Number.parseFloat(summary.multiplier)}`}]
           })
         }}>Add To Cart</button>
       </section>
