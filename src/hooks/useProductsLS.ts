@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { ProductLocalStorage, Products } from "../types"
-import productsJson from "../assets/data/products.json"
+import productsJson from "../data/products.json"
 
 export default function useProductsLS() {
   const products : Products[] =  productsJson

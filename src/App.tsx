@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import type { Units } from "./types"
 //import productsJson from "./assets/data/products.json"
-import unitsJson from "./assets/data/units.json"
+import unitsJson from "./data/units.json"
 import StorePrices from "./components/StorePrices";
 import ProductSelection from "./components/ProductSelection";
 import Cart from "./components/Cart";
