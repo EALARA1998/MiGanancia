@@ -9,12 +9,11 @@ type ProductProps = {
   setProductsLS: React.Dispatch<React.SetStateAction<ProductLocalStorage[]>>,
   //HandleOnChangeStoreProductUnit: (e: React.ChangeEvent<HTMLSelectElement>) => void
   units: Units[]
-  cart: CartItemType[]
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>
   summary: Summary
 }
 
-export default function Product( { product, productLS, setProductsLS, units, cart, setCart, summary }: ProductProps ) {
+export default function Product( { product, productLS, setProductsLS, units, setCart, summary }: ProductProps ) {
   return (
     <>
       <section className="content_product-selection_products_product">
