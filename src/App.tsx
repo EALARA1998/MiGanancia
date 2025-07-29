@@ -74,7 +74,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home></Home>} />
           <Route path="/store-prices" element={<StorePrices products={products} productsLS={productsLS} setProductsLS={setProductsLS} units={units}></StorePrices>} />
-          <Route path="/product-selection" element={<ProductSelection products={products} productsLS={productsLS} setProductsLS={setProductsLS} units={units} cart={cart} setCart={setCart} summary={summary}></ProductSelection>} />
+          <Route path="/product-selection" element={<ProductSelection products={products} productsLS={productsLS} setProductsLS={setProductsLS} units={units} setCart={setCart} summary={summary}></ProductSelection>} />
           <Route path="/fuel" element={<Fuel units={units} fuel={fuel} setFuel={setFuel} setCart={setCart} summary={summary}></Fuel>} />
           <Route path="/cart" element={<Cart cart={cart} setCart={setCart} summary={summary} setSummary={setSummary}></Cart>} />
         </Routes>
