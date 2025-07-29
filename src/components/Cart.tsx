@@ -1,6 +1,6 @@
 import type { CartItemType, Summary } from "../types";
-import { Convert } from "../assets/utilities/unitConversions"
-import { IsPositive, IsNumeric } from "../assets/utilities/dataValidation";
+import { Convert } from "../utilities/unitConversions"
+import { IsPositive, IsNumeric } from "../utilities/dataValidation";
 
 type CartProps = {
   cart: CartItemType[]
@@ -115,27 +115,27 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
           </section>
           <section className="content_cart_summary_section">
             <h3>Cost per unit:</h3>
-            <p>{summary.costPerUnit}</p>
+            <p>{Number(summary.costPerUnit).toFixed(3)}</p>
           </section>
           <section className="content_cart_summary_section">
             <h3>Profit per unit:</h3>
-            <p>{summary.profitPerUnit}</p>
+            <p>{Number(summary.profitPerUnit).toFixed(3)}</p>
           </section>
           <section className="content_cart_summary_section">
             <h3>Profit %:</h3>
-            <p>{summary.profitPercent}</p>
+            <p>{Number(summary.profitPercent).toFixed(3)}</p>
           </section>
           <section className="content_cart_summary_section">
             <h3>Total cost:</h3>
-            <p>{summary.totalCost}</p>
+            <p>{Number(summary.totalCost).toFixed(3)}</p>
           </section>
           <section className="content_cart_summary_section">
             <h3>Total profit:</h3>
-            <p>{summary.totalProfit}</p>
+            <p>{Number(summary.totalProfit).toFixed(3)}</p>
           </section>
           <section className="content_cart_summary_section">
             <h3>Total selling price:</h3>
-            <p>{summary.totalSellingPrice}</p>
+            <p>{Number(summary.totalSellingPrice).toFixed(3)}</p>
           </section>
         </section>
       </section>

@@ -1,4 +1,4 @@
-import { IsPositive } from "../assets/utilities/dataValidation";
+import { IsPositive } from "../utilities/dataValidation";
 import type { Products, ProductLocalStorage, Units } from "../types"
 
 type StoreProductProps = {

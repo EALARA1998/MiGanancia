@@ -1,6 +1,6 @@
 import type { Products, ProductLocalStorage, Units, CartItemType, Summary } from "../types"
-import { IsPositive } from "../assets/utilities/dataValidation";
-import { Convert } from "../assets/utilities/unitConversions"
+import { IsPositive } from "../utilities/dataValidation";
+import { Convert } from "../utilities/unitConversions"
 
 type ProductProps = {
   product: Products

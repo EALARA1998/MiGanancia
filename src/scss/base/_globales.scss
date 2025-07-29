@@ -1,0 +1,114 @@
+@use "mixins" as *;
+html {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-padding-top: 0rem;
+  margin: 1rem;
+}
+input, select {
+  font-family: 'Courier New', Courier, monospace;
+}
+*, 
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+  padding: 0;
+}
+nav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: GetFontSize("mobile","nav");
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0;
+  @include Mobile(){
+    flex-direction: row;
+  }
+}
+h1{
+  font-size: GetFontSize("mobile","h1");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h1");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h1");
+  }
+}
+h2{
+  text-transform: uppercase;
+  font-size: GetFontSize("mobile","h2");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h2");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h2");
+  }
+}
+h3{
+  font-size: GetFontSize("mobile","h3");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h3");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h3");
+  }
+}
+h4{
+  font-size: GetFontSize("mobile","h4");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h4");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h4");
+  }
+}
+h5{
+  font-size: GetFontSize("mobile","h5");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h5");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h5");
+  }
+}
+p{
+  font-size: GetFontSize("mobile","h3");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h3");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h3");
+  }
+}
+button{
+  font-size: GetFontSize("mobile","h5");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h5");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h5");
+  }
+}
+thead{
+  font-size: GetFontSize("mobile","h5");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h5");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h5");
+  }
+}
+td{
+  font-size: GetFontSize("mobile","h5");
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h5");
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h5");
+  }
+}

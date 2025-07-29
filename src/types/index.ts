@@ -42,7 +42,7 @@ export type Summary = {
   totalProfit: string
   totalSellingPrice: string
 }
-export type Fuel = {
+export type Fuels = {
   powerConsumptionElectricity: string
   powerConsumptionElectricityUnit: string
   priceElectricity: string

@@ -1,11 +1,11 @@
-import type { Units, Fuel, CartItemType, Summary } from "../types"
-import { IsPositive } from "../assets/utilities/dataValidation"
-import { Convert } from "../assets/utilities/unitConversions"
+import type { Units, Fuels, CartItemType, Summary } from "../types"
+import { IsPositive } from "../utilities/dataValidation"
+import { Convert } from "../utilities/unitConversions"
 
 type FuelProps = {
   units: Units[]
-  fuel: Fuel
-  setFuel: React.Dispatch<React.SetStateAction<Fuel>>
+  fuel: Fuels
+  setFuel: React.Dispatch<React.SetStateAction<Fuels>>
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>
   summary: Summary
 }
@@ -89,7 +89,7 @@ export default function Fuel({units, fuel, setFuel, setCart, summary} : FuelProp
               </select>
             </div>
           </section>
-          <button onClick={()=>{
+          <button className="add-button" onClick={()=>{
           if (!fuel.powerConsumptionElectricity||!fuel.priceElectricity||!fuel.timeElectricity) {
             return
           }
