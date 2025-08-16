@@ -1,0 +1,14 @@
+@use "../base/mixins" as *;
+.Toastify{
+  &__toast{
+    font-size: GetFontSize("mobile","h4");;
+  }
+  &__toast-container{
+    margin: 0;
+  }
+  &__close-button{
+    margin: 0;
+    width: 5rem;
+    height: 5rem;
+  }
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Oven",
+    "img": "oven.png"
+  },
+  {
+    "name": "Hand_Mixer",
+    "img": "hand_mixer.svg"
+  },
+  {
+    "name": "Stand_Mixer",
+    "img": "stand_mixer.png"
+  },
+  {
+    "name": "Blender",
+    "img": "blender.png"
+  },
+  {
+    "name": "Hand_Blender",
+    "img": "hand_blender.svg" },
+  {
+    "name": "Juicer",
+    "img": "juicer.svg"
+  }
+]

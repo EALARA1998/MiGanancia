@@ -1,13 +1,26 @@
 @use "mixins" as *;
+@use "sass:color";
 html {
   font-family: 'Courier New', Courier, monospace;
   font-size: 62.5%;
+  font-variant: small-caps;
   box-sizing: border-box;
   scroll-padding-top: 0rem;
   margin: 1rem;
 }
-input, select {
+input, select, button {
   font-family: 'Courier New', Courier, monospace;
+  font-variant: small-caps;
+  font-size: GetFontSize("mobile","h4");;
+  @include Tablet(){
+    font-size: GetFontSize("tablet","h4");;
+  }
+  @include Desktop(){
+    font-size: GetFontSize("desktop","h4");;
+  }
+}
+button{
+  font-weight: bold;
 }
 *, 
 *:before,
@@ -18,16 +31,41 @@ h1, h2, h3, h4, h5, h6, p{
   margin: 0;
   padding: 0;
 }
+h1,h2,h3,h4,h5,h6,label,select{
+  color: #1E3A8A;
+  font-weight: bold;
+}
+p{
+  color: #374151;
+}
+
 nav{
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: GetFontSize("mobile","nav");
-  gap: 2rem;
   justify-content: center;
-  margin: 2rem 0;
-  @include Mobile(){
+  margin: 0 0 2rem 0;
+  a{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color linear 0.2s;
+    background-color: #2563EB;
+    &:hover{
+      background-color: color.adjust(#2563EB, $lightness: 5%);
+    }
+  }
+  @include Tablet(){
     flex-direction: row;
+  }
+  @include Desktop(){
+  
   }
 }
 h1{
@@ -58,7 +96,7 @@ h3{
     font-size: GetFontSize("desktop","h3");
   }
 }
-h4{
+h4, label{
   font-size: GetFontSize("mobile","h4");
   @include Tablet(){
     font-size: GetFontSize("tablet","h4");

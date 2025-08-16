@@ -25,42 +25,42 @@
   @if $screen=="mobile" {
     @if $font=="h1" {
       @return $fontSize;
-    }@else if $font=="h2" {
-      @return MultiplyByPercentage($fontSize, .15, 1);
-    }@else if $font=="h3" or $font=="nav"{
-      @return MultiplyByPercentage($fontSize, .15, 2);
+    }@else if $font=="h2" or $font=="nav" {
+      @return $fontSize*0.8;
+    }@else if $font=="h3"{
+      @return $fontSize*0.7;
     }@else if $font=="h4" {
-      @return MultiplyByPercentage($fontSize, .15, 3);
+      @return $fontSize*0.6;
     }@else if $font=="h5" {
-      @return MultiplyByPercentage($fontSize, .15, 4);
+      @return $fontSize*0.5;
     }
   }
-  $fontSize: $fontSize*.15+$fontSize;
+  $fontSize: $fontSize*1.5;
   @if $screen=="tablet" {
     @if $font=="h1" {
       @return $fontSize;
-    }@else if $font=="h2" {
-      @return MultiplyByPercentage($fontSize, .15, 1);
-    }@else if $font=="h3" or $font=="nav" {
-      @return MultiplyByPercentage($fontSize, .15, 2);
+    }@else if $font=="h2" or $font=="nav" {
+      @return $fontSize*0.8;
+    }@else if $font=="h3" {
+      @return $fontSize*0.7;
     }@else if $font=="h4" {
-      @return MultiplyByPercentage($fontSize, .15, 3);
+      @return $fontSize*0.6;
     }@else if $font=="h5" {
-      @return MultiplyByPercentage($fontSize, .15, 4);
+      @return $fontSize*0.5;
     }
   }
   $fontSize: $fontSize*.15+$fontSize;
   @if $screen=="desktop" {
     @if $font=="h1" {
       @return $fontSize;
-    }@else if $font=="h2" {
-      @return MultiplyByPercentage($fontSize, .15, 1);
-    }@else if $font=="h3" or $font=="nav" {
-      @return MultiplyByPercentage($fontSize, .15, 2);
+    }@else if $font=="h2" or $font=="nav" {
+      @return $fontSize*0.8;
+    }@else if $font=="h3" {
+      @return $fontSize*0.7;
     }@else if $font=="h4" {
-      @return MultiplyByPercentage($fontSize, .15, 3);
+      @return $fontSize*0.6;
     }@else if $font=="h5" {
-      @return MultiplyByPercentage($fontSize, .15, 4);
+      @return $fontSize*0.5;
     }
   }
 }

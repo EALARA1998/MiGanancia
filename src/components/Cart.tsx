@@ -1,15 +1,56 @@
-import type { CartItemType, Summary } from "../types";
-import { Convert } from "../utilities/unitConversions"
-import { IsPositive, IsNumeric } from "../utilities/dataValidation";
+import { useStore } from "../store/useStore";
+import { ArrowDownTrayIcon, ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import { getDisplayAmount, stringToNumberWithoutEmpty } from "../helpers/dataValidation";
+import { useMemo, useRef } from "react";
 
 type CartProps = {
-  cart: CartItemType[]
-  setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>
-  summary: Summary
-  setSummary: React.Dispatch<React.SetStateAction<Summary>>
 }
 
-export default function Cart({ cart, setCart, summary, setSummary } : CartProps) {
+export default function Cart({} : CartProps) {
+
+  const {
+    cart,
+    removeItemFromCart,
+    cartMultiplier,
+    setCartMultiplier,
+    setProductSelectionAmountUnit,
+    cartQuantityProduced,
+    setCartQuantityProduced,
+    cartSellingPricePerUnit,
+    setCartSellingPricePerUnit,
+    options,
+    downloadCurrentCart,
+    uploadCart,
+  } = useStore()
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleClick = () => {
+    fileInputRef.current?.click(); // simular click en input hidden
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadCart(file); // usar la acción del store
+    }
+  };
+
+  function multiplyValue(value: number, multiplier: number) : number {
+    return value*multiplier
+  }
+
+  function AddCurrencySymbol(text: string) {
+    return options.currencySymbol+". "+text
+  }
+
+  const totalCost = useMemo(()=>((cart.reduce((total, n) => total + n.finalPrice ,0))*cartMultiplier),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  const costPerUnit = useMemo(()=>(totalCost/cartQuantityProduced),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  const profitPerUnit = useMemo(()=>(cartSellingPricePerUnit-costPerUnit),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  const profitPercent = useMemo(()=>(profitPerUnit / costPerUnit * 100),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  const totalProfit = useMemo(()=>(profitPerUnit * cartQuantityProduced),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  const totalSellingPrice = useMemo(()=>(cartQuantityProduced * cartSellingPricePerUnit),[cart,cartQuantityProduced,cartSellingPricePerUnit,cartMultiplier])
+  
   return (
     <>
       <section className="content_cart">
@@ -19,14 +60,11 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
           <div className="content_cart_items_section">
             <div className="content_cart_items_section_multiplier">
               <h3>Multiplier</h3>
-              <input type="text" value={summary.multiplier} onChange={e=>{
-                const newValue = e.target.value
-                if (IsPositive(newValue)) {
-                  setSummary(prev => {
-                    return { ...prev, multiplier: `${newValue}`}
-                  })
-                }
-              }}/>
+              <input
+                type="text"
+                value={getDisplayAmount(cartMultiplier)}
+                onChange={(e)=>{setCartMultiplier(stringToNumberWithoutEmpty(e.target.value))}}  
+              />
             </div>
             <table>
               <thead>
@@ -41,39 +79,29 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
                 </tr>
               </thead>
               <tbody>
-                {cart.map(item => {
-                  return <tr key={item.num}>
-                    <td>{item.num}</td>
+                {cart.map((item, i) => {
+                  return (
+                  <tr key={i}>
+                    <td>{i+1}</td>
                     <td>{item.name}</td>
                     <td><img src={`/img/${item.img}`} alt={item.name} width={50} height={50} /></td>
-                    <td>{Number.parseFloat(item.quantityMultiplied).toFixed(5)}</td>
+                    <td>{multiplyValue(item.product_selection_amount, cartMultiplier).toFixed(5)}</td>
                     <td>
-                        <select value={item.productUnit} onChange={(e) => {
-                          const newUnit = e.target.value;
-                          const newValueQuantityMultiplied = Convert(item.physicalUnit, Number.parseFloat(item.quantityMultiplied), item.productUnit, newUnit).toString()
-                          const newValueQuantity = Convert(item.physicalUnit, Number.parseFloat(item.quantity), item.productUnit, newUnit).toString()
-                          setCart(prev => {
-                            return prev.map(cartItem => {
-                              if (cartItem.id === item.id) {
-                                return { ...cartItem, productUnit: newUnit, quantityMultiplied: newValueQuantityMultiplied, quantity: newValueQuantity };
-                              }
-                              return cartItem;
-                            });
-                          });
-                        }}>
-                          <option value="" disabled>----</option>
-                          { item.units.map((e, i) => <option key={i} value={e}>{e}</option>) }
-                        </select>
+                      <select
+                        value={item.product_selection_amount_unit}
+                        onChange={(e)=>{setProductSelectionAmountUnit(item.id,e.target.value)}}
+                      >
+                        { item.amount_units.map( (u,j) => (
+                          <option key={j} value={u}>{u}</option>
+                        )) }
+                      </select>
                     </td>
-                    <td>{Number.parseFloat(item.priceMultiplied).toFixed(3)}</td>
-                    <td><button className="remove-button" onClick={()=>{
-                      setCart(prev => {
-                        const filtered = prev.filter(e => e.id !== item.id)
-                        const reindexed = filtered.map((e, i) => ({ ...e, num: `${i+1}` }))
-                        return reindexed
-                      })
-                    }}>Remove</button></td>
-                  </tr>
+                    <td>{AddCurrencySymbol(multiplyValue(item.finalPrice, cartMultiplier).toFixed(5))}</td>
+                    <td><button
+                      className="remove-button"
+                      onClick={()=>{removeItemFromCart(item.id)}}
+                    >Remove</button></td>
+                  </tr>)
                 })}
                 <tr>
                   <td>Total</td>
@@ -81,7 +109,7 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>{Number.parseFloat(summary.totalCost).toFixed(3)}</td>
+                  <td>{AddCurrencySymbol(totalCost.toFixed(5))}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -91,52 +119,73 @@ export default function Cart({ cart, setCart, summary, setSummary } : CartProps)
         </section>
         <section className="content_cart_summary">
           <h2>Summary</h2>
-          <section className="content_cart_summary_section">
+          <section>
             <h3>Quantity produced</h3>
-            <input type="text" value={summary.quantityProduced} onChange={(e)=>{
-              const newValue = e.target.value
-              if (IsNumeric(newValue)) {
-                setSummary(prev => {
-                  return { ...prev, quantityProduced: newValue}
-                })
-              }
-            }}/>
+            <div>
+              <input
+                type="number"
+                value={getDisplayAmount(cartQuantityProduced)}
+                onChange={(e)=>{setCartQuantityProduced(stringToNumberWithoutEmpty(e.target.value))}}
+              />
+              <p>units</p>
+            </div>
           </section>
-          <section className="content_cart_summary_section">
+          <section>
             <h3>Selling price per unit</h3>
-            <input type="text" value={summary.sellingPricePerUnit} onChange={e=>{
-              const newValue = e.target.value
-              if (IsNumeric(newValue)) {
-                setSummary(prev => {
-                  return { ...prev, sellingPricePerUnit: newValue}
-                })
-              }
-            }}/>
+            <div>
+              <input
+                type="number"
+                value={getDisplayAmount(cartSellingPricePerUnit)}
+                onChange={e=>{setCartSellingPricePerUnit(stringToNumberWithoutEmpty(e.target.value))}}
+              />
+              <p>{options.currencySymbol}</p>
+            </div>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_cost-per-unit">
             <h3>Cost per unit:</h3>
-            <p>{Number(summary.costPerUnit).toFixed(3)}</p>
+            <p>{AddCurrencySymbol(costPerUnit.toFixed(5))}</p>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_profit-per-unit">
             <h3>Profit per unit:</h3>
-            <p>{Number(summary.profitPerUnit).toFixed(3)}</p>
+            <p>{AddCurrencySymbol(profitPerUnit.toFixed(5))}</p>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_profit-percent">
             <h3>Profit %:</h3>
-            <p>{Number(summary.profitPercent).toFixed(3)}</p>
+            <p>{profitPercent.toFixed(5)} %</p>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_total-cost">
             <h3>Total cost:</h3>
-            <p>{Number(summary.totalCost).toFixed(3)}</p>
+            <p>{AddCurrencySymbol(totalCost.toFixed(5))}</p>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_total-profit">
             <h3>Total profit:</h3>
-            <p>{Number(summary.totalProfit).toFixed(3)}</p>
+            <p>{AddCurrencySymbol(totalProfit.toFixed(5))}</p>
           </section>
-          <section className="content_cart_summary_section">
+          <section className="content_cart_summary_total-selling-price">
             <h3>Total selling price:</h3>
-            <p>{Number(summary.totalSellingPrice).toFixed(3)}</p>
+            <p>{AddCurrencySymbol(totalSellingPrice.toFixed(5))}</p>
           </section>
+        </section>
+        <section className="content_cart_upload">
+          <input
+            type="file"
+            accept="application/json"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleChange}
+          />
+          <button onClick={handleClick}>
+            Upload cart (JSON)
+            <ArrowUpTrayIcon />
+          </button>
+        </section>
+        <section className="content_cart_download">
+          <button 
+            onClick={()=>{downloadCurrentCart()}}
+          >
+            Download Current Cart
+            <ArrowDownTrayIcon />
+          </button>
         </section>
       </section>
     </>

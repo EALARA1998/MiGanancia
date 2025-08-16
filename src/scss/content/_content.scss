@@ -1,4 +1,5 @@
 @use "../base/mixins" as *;
+@use "sass:color";
 @mixin product-card($hover-color) {
   display: flex;
   flex-direction: column;
@@ -19,11 +20,14 @@
     text-align: center;
     margin: 1rem;
   }
-  &_section {
+  form, section {
     display: flex;
     flex-direction: column;
     align-items: center;
     h4 {
+      margin: 1rem 0 0.5rem 0;
+    }
+    label{
       margin: 1rem 0 0.5rem 0;
     }
     div{
@@ -34,9 +38,6 @@
     }
     input{
       width: 10rem;
-    }
-    select{
-
     }
   }
 }
@@ -58,20 +59,14 @@
   h2{
     text-align: center
   }
-  select{
-    font-weight: bold;
-  }
   input, select, button{
     text-align: center;
   }
-  button{
+  .remove-button, .add-button{
     width: 15rem;
     height: 3rem;
     margin: 1rem 0 0 0;
     text-transform: uppercase;
-    font-weight: bold;
-  }
-  .remove-button, .add-button{
     border: none;
     border-radius: 0.5rem;
     color: white;
@@ -79,13 +74,21 @@
   }
   .remove-button{
     width: 6rem;
+    transition: background-color linear 0.1s;
     background-color: rgba(197,58,61,255);
     @include Tablet(){
       width: 10rem;
     }
+    &:hover{
+      background-color: color.adjust(rgba(197,58,61,255), $lightness: 5%);
+    }
   }
   .add-button{
+    transition: background-color linear 0.1s;
     background-color: rgba(78,181,126,255);
+    &:hover{
+      background-color: color.adjust(rgba(78,181,126,255), $lightness: 5%);
+    }
   }
   &_store-prices{
     &_store-products{
@@ -103,16 +106,25 @@
       }
     }
   }
-  &_fuel{
+  &_machines{
+    &_electricity{
+      @include product-card(rgb(163,201,249));
+    }
+    &_machines-section{
+      @include product-grid();
+      &_machine{
+        @include product-card(rgb(163,201,249));
+      }
+    }
+  }
+  &_home{
     display: flex;
     flex-direction: column;
     align-items: center;
-    &_electricity{
-      @include product-card(rgb(163,201,249));
-      &_section{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    section{
+      h3{
+        text-decoration: underline;
+        margin-bottom: 2rem;
       }
     }
   }
@@ -120,9 +132,23 @@
     display: flex;
     flex-direction: column;
     gap: 2rem 0;
+    input{
+      text-align: center;
+      font-weight: bold;
+      font-size: GetFontSize("mobile","h3");
+      @include Tablet(){
+        font-size: GetFontSize("tablet","h3");
+      }
+      @include Desktop(){
+        font-size: GetFontSize("desktop","h3");
+      }
+    }
     @include Tablet(){
       display: grid;
       grid-template-columns: 50% 50%;
+      &_items, &_summary{ 
+        padding: 0 5rem;
+      }
     }
     &_items{
       display: flex;
@@ -142,6 +168,9 @@
           border-width: 2rem;
           td, th{
             text-align: center;
+            @include Tablet(){
+              padding: 1rem;
+            }
           }
           thead{
             th{
@@ -166,12 +195,94 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      &_section{
+      section{
         display: flex;
         align-items: center;
+        padding: 1rem;
         justify-content: space-between;
-        input{
-          text-align: center;
+        border-bottom: .1rem solid;
+        div{
+          display: flex;
+          gap: 1rem;
+        }
+      }
+      .content_cart_summary_cost-per-unit{
+        background-color: #4F81BD;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .content_cart_summary_profit-per-unit{
+        background-color: #4CAF50;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .content_cart_summary_profit-percent{
+        background-color: #FFC107;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .content_cart_summary_total-cost{
+        background-color: #607D8B;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .content_cart_summary_total-profit{
+        background-color: #388E3C;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+      .content_cart_summary_total-selling-price{
+        background-color: #FF9800;
+        h3, p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
+    &_upload, &_download{
+      display: flex;
+      flex-direction: column;
+      button{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 2rem;
+        padding: 1rem;
+        font-size: 3rem;
+        border: none;
+        color: white;
+        cursor: pointer;
+        svg{
+          width: 3rem;
+          color: white;
+        }
+      }
+    }
+    &_upload{
+      button{
+        background-color: #779ce9;
+        transition: background-color linear .1s;
+        &:hover{
+          background-color: color.adjust(#779ce9, $lightness: 10%);  
+        }
+      }
+    }
+    &_download{
+      button{
+        background-color: #9de977;
+        transition: background-color linear .1s;
+        &:hover{
+          background-color: color.adjust(#9de977, $lightness: 10%);  
         }
       }
     }
