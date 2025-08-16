@@ -10,7 +10,6 @@ html {
 }
 input, select, button {
   font-family: 'Courier New', Courier, monospace;
-  font-variant: small-caps;
   font-size: GetFontSize("mobile","h4");;
   @include Tablet(){
     font-size: GetFontSize("tablet","h4");;
@@ -19,7 +18,8 @@ input, select, button {
     font-size: GetFontSize("desktop","h4");;
   }
 }
-button{
+button, input{
+  font-variant: small-caps;
   font-weight: bold;
 }
 *, 
