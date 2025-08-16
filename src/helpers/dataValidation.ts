@@ -4,9 +4,6 @@ export function isNumeric (text: string): boolean {
 export function isPositive(amount: number): boolean {
   return amount > 0  
 }
-export function IsPositive(amount: string): boolean {
-  return false
-}
 export function getDisplayAmount(amount: number): string | number {
   return amount === 0 ? "" : amount;
 }
