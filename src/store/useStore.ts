@@ -156,7 +156,7 @@ export const useStore = create<StoreState>()(
                 position: "bottom-right"
               });
             } catch (error) {
-              console.error("Error al leer el archivo JSON:", error);
+              console.error("Error reading JSON file JSON:", error);
               toast("Error al leer el archivo JSON", {
                 type: "error",
                 autoClose: 2000,
@@ -187,14 +187,14 @@ export const useStore = create<StoreState>()(
               const text = e.target?.result as string;
               const json: CartItem[] = JSON.parse(text);
               set(() => ({ cart: json }));
-              toast("Carrito cargado correctamente", {
+              toast("Cart has been uploaded correctly.", {
                 type: "success",
                 autoClose: 2000,
                 position: "bottom-right"
               });
             } catch (error) {
-              console.error("Error al leer el archivo JSON:", error);
-              toast("Error al leer el archivo JSON", {
+              console.error("Error reading JSON file:", error);
+              toast("Error reading JSON file JSON", {
                 type: "error",
                 autoClose: 2000,
                 position: "bottom-right"
@@ -306,7 +306,7 @@ export const useStore = create<StoreState>()(
             amount_units.length === 0 ||
             store_prices_price === 0
           ){
-            toast("Los valores no deben estar vacios.", {
+            toast("Values must not be empty.", {
               type: "error",
               autoClose: 2000,
               position: "bottom-right"
@@ -329,7 +329,7 @@ export const useStore = create<StoreState>()(
           set((state) => {
             return { cart: [...state.cart, cartItem] };
           })
-          toast(`${cartItem.name} se ha añadido al carrito.`, {
+          toast(`${cartItem.name} has been added to cart.`, {
             type: "success",
             autoClose: 2000,
             position: "bottom-right"
@@ -351,7 +351,7 @@ export const useStore = create<StoreState>()(
             machine_time_amount === 0 ||
             machine_time_amount_unit === ""
           ){
-            toast("Los valores no deben estar vacios.", {
+            toast("Values must not be empty.", {
               type: "error",
               autoClose: 2000,
               position: "bottom-right"
@@ -381,7 +381,7 @@ export const useStore = create<StoreState>()(
           set((state) => {
             return { cart: [...state.cart, cartItem] };
           })
-          toast(`${cartItem.name} se ha añadido al carrito.`, {
+          toast(`${cartItem.name} has been added to cart.`, {
             type: "success",
             autoClose: 2000,
             position: "bottom-right"
