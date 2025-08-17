@@ -33,6 +33,7 @@ export default function Cart({} : CartProps) {
     const file = e.target.files?.[0];
     if (file) {
       uploadCart(file); // usar la acción del store
+      e.target.value = ""
     }
   };
 

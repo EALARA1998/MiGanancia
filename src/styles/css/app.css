@@ -553,53 +553,54 @@ td {
   display: flex;
   gap: 1rem;
 }
-.content_cart_summary .content_cart_summary_cost-per-unit {
+.content_cart_summary_cost-per-unit {
   background-color: #4F81BD;
 }
-.content_cart_summary .content_cart_summary_cost-per-unit h3, .content_cart_summary .content_cart_summary_cost-per-unit p {
+.content_cart_summary_cost-per-unit h3, .content_cart_summary_cost-per-unit p {
   color: white;
   font-weight: bold;
 }
-.content_cart_summary .content_cart_summary_profit-per-unit {
+.content_cart_summary_profit-per-unit {
   background-color: #4CAF50;
 }
-.content_cart_summary .content_cart_summary_profit-per-unit h3, .content_cart_summary .content_cart_summary_profit-per-unit p {
+.content_cart_summary_profit-per-unit h3, .content_cart_summary_profit-per-unit p {
   color: white;
   font-weight: bold;
 }
-.content_cart_summary .content_cart_summary_profit-percent {
+.content_cart_summary_profit-percent {
   background-color: #FFC107;
 }
-.content_cart_summary .content_cart_summary_profit-percent h3, .content_cart_summary .content_cart_summary_profit-percent p {
+.content_cart_summary_profit-percent h3, .content_cart_summary_profit-percent p {
   color: white;
   font-weight: bold;
 }
-.content_cart_summary .content_cart_summary_total-cost {
+.content_cart_summary_total-cost {
   background-color: #607D8B;
 }
-.content_cart_summary .content_cart_summary_total-cost h3, .content_cart_summary .content_cart_summary_total-cost p {
+.content_cart_summary_total-cost h3, .content_cart_summary_total-cost p {
   color: white;
   font-weight: bold;
 }
-.content_cart_summary .content_cart_summary_total-profit {
+.content_cart_summary_total-profit {
   background-color: #388E3C;
 }
-.content_cart_summary .content_cart_summary_total-profit h3, .content_cart_summary .content_cart_summary_total-profit p {
+.content_cart_summary_total-profit h3, .content_cart_summary_total-profit p {
   color: white;
   font-weight: bold;
 }
-.content_cart_summary .content_cart_summary_total-selling-price {
+.content_cart_summary_total-selling-price {
   background-color: #FF9800;
 }
-.content_cart_summary .content_cart_summary_total-selling-price h3, .content_cart_summary .content_cart_summary_total-selling-price p {
+.content_cart_summary_total-selling-price h3, .content_cart_summary_total-selling-price p {
   color: white;
   font-weight: bold;
 }
-.content_cart_upload, .content_cart_download {
+
+.content_cart_download, .content_cart_upload, .content_store-prices_file-manager_download, .content_store-prices_file-manager_upload {
   display: flex;
   flex-direction: column;
 }
-.content_cart_upload button, .content_cart_download button {
+.content_cart_download button, .content_cart_upload button, .content_store-prices_file-manager_download button, .content_store-prices_file-manager_upload button {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -610,10 +611,19 @@ td {
   color: white;
   cursor: pointer;
 }
-.content_cart_upload button svg, .content_cart_download button svg {
+.content_cart_download button svg, .content_cart_upload button svg, .content_store-prices_file-manager_download button svg, .content_store-prices_file-manager_upload button svg {
   width: 3rem;
   color: white;
 }
+
+.content_cart_download button {
+  background-color: #9de977;
+  transition: background-color linear 0.1s;
+}
+.content_cart_download button:hover {
+  background-color: rgb(188.6329113924, 240.1012658228, 162.8987341772);
+}
+
 .content_cart_upload button {
   background-color: #779ce9;
   transition: background-color linear 0.1s;
@@ -621,12 +631,31 @@ td {
 .content_cart_upload button:hover {
   background-color: rgb(162.8987341772, 187.9556962025, 240.1012658228);
 }
-.content_cart_download button {
+
+@media (min-width: 1024px) {
+  .content_store-prices_file-manager {
+    display: flex;
+  }
+}
+.content_store-prices_file-manager_download {
+  width: 100%;
+}
+.content_store-prices_file-manager_download button {
   background-color: #9de977;
   transition: background-color linear 0.1s;
 }
-.content_cart_download button:hover {
+.content_store-prices_file-manager_download button:hover {
   background-color: rgb(188.6329113924, 240.1012658228, 162.8987341772);
+}
+.content_store-prices_file-manager_upload {
+  width: 100%;
+}
+.content_store-prices_file-manager_upload button {
+  background-color: #779ce9;
+  transition: background-color linear 0.1s;
+}
+.content_store-prices_file-manager_upload button:hover {
+  background-color: rgb(162.8987341772, 187.9556962025, 240.1012658228);
 }
 
 .Toastify__toast {

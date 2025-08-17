@@ -1,10 +1,13 @@
 import { useStore } from "../store/useStore"
 import { useForm } from "react-hook-form"
 import { getDisplayAmount, stringToNumberWithoutEmpty } from "../helpers/dataValidation"
+import { ArrowDownTrayIcon, ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import { useRef } from "react";
 
 type FormValues = {
   store_prices: {
-    physical_unit: number
+    name: string
+    physical_unit: string
     amount: number
     amount_unit: string
     price: number
@@ -17,9 +20,34 @@ type StorePricesProp = {
 
 export default function StorePrices( {} : StorePricesProp ) {
 
-  const { products, storePricesForm, setStorePrices, units } = useStore()
+  const { products, storePricesForm, setStorePrices, units, downloadCurrentStorePrices, uploadStorePrices } = useStore()
 
-  const { register } = useForm<FormValues>()
+  const { register } = useForm<FormValues>({
+    defaultValues: {
+      store_prices: products.map(product => ({
+        name: product.name,
+        physical_unit: "",
+        amount: 0,
+        amount_unit: "",
+        price: 0,
+      })),
+    },
+  })
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  
+  const handleClick = () => {
+    fileInputRef.current?.click(); // simular click en input hidden
+  };
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadStorePrices(file); // usar la acción del store
+      e.target.value = ""
+    }
+  };
+  
 
   // const addToStorePrices = (i: number) => {
   //   const machineData = getValues(`store_prices.${i}`); // solo datos de esa máquina
@@ -41,6 +69,7 @@ export default function StorePrices( {} : StorePricesProp ) {
         <section className="content_store-prices_store-products">
           {products.map((product, i)=>{
             const storePricesData = storePricesForm[i] || {
+              name: product.name,
               physical_unit: "",
               amount: 0,
               amount_unit: "",
@@ -51,6 +80,10 @@ export default function StorePrices( {} : StorePricesProp ) {
               key={i}
               className="content_store-prices_store-products_store-product">
               <h3>{product.name}</h3>
+              <input
+                type="hidden"
+                {...register(`store_prices.${i}.name`)}
+              />
               <img src={`/img/${product.img}`} alt={product.name} />
               <section>
                 <label htmlFor={`${product.name.toLowerCase().replace(/\s+/g, '_')}_store_prices_physical_unit`}>Physical Unit</label>
@@ -102,6 +135,29 @@ export default function StorePrices( {} : StorePricesProp ) {
               </section>
             </section>
           )})}
+        </section>
+      </section>
+      <section className="content_store-prices_file-manager">
+        <section className="content_store-prices_file-manager_download">
+          <button
+            onClick={()=>{downloadCurrentStorePrices()}}
+          >
+            Download Store Prices (JSON)
+            <ArrowDownTrayIcon />
+          </button>
+        </section>
+        <section className="content_store-prices_file-manager_upload">
+          <input
+            type="file"
+            accept="application/json"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleChange}
+          />
+          <button onClick={handleClick}>
+            Upload cart (JSON)
+            <ArrowUpTrayIcon />
+          </button>
         </section>
       </section>
     </>

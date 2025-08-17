@@ -206,42 +206,42 @@
           gap: 1rem;
         }
       }
-      .content_cart_summary_cost-per-unit{
+      &_cost-per-unit{
         background-color: #4F81BD;
         h3, p {
           color: white;
           font-weight: bold;
         }
       }
-      .content_cart_summary_profit-per-unit{
+      &_profit-per-unit{
         background-color: #4CAF50;
         h3, p {
           color: white;
           font-weight: bold;
         }
       }
-      .content_cart_summary_profit-percent{
+      &_profit-percent{
         background-color: #FFC107;
         h3, p {
           color: white;
           font-weight: bold;
         }
       }
-      .content_cart_summary_total-cost{
+      &_total-cost{
         background-color: #607D8B;
         h3, p {
           color: white;
           font-weight: bold;
         }
       }
-      .content_cart_summary_total-profit{
+      &_total-profit{
         background-color: #388E3C;
         h3, p {
           color: white;
           font-weight: bold;
         }
       }
-      .content_cart_summary_total-selling-price{
+      &_total-selling-price{
         background-color: #FF9800;
         h3, p {
           color: white;
@@ -249,41 +249,66 @@
         }
       }
     }
-    &_upload, &_download{
-      display: flex;
-      flex-direction: column;
-      button{
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        margin: 2rem;
-        padding: 1rem;
-        font-size: 3rem;
-        border: none;
-        color: white;
-        cursor: pointer;
-        svg{
-          width: 3rem;
-          color: white;
-        }
+  }
+}
+.content_cart_download, .content_cart_upload, .content_store-prices_file-manager_download, .content_store-prices_file-manager_upload{
+  display: flex;
+  flex-direction: column;
+  button{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 2rem;
+    padding: 1rem;
+    font-size: 3rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    svg{
+      width: 3rem;
+      color: white;
+    }
+  }
+}
+.content_cart_download{
+  button{
+    background-color: #9de977;
+    transition: background-color linear .1s;
+    &:hover{
+      background-color: color.adjust(#9de977, $lightness: 10%);  
+    }
+  }
+}
+.content_cart_upload{
+  button{
+    background-color: #779ce9;
+    transition: background-color linear .1s;
+    &:hover{
+      background-color: color.adjust(#779ce9, $lightness: 10%);  
+    }
+  }
+}
+.content_store-prices_file-manager{
+  @include Tablet(){
+    display: flex;
+  }
+  &_download{
+    width: 100%;
+    button{
+      background-color: #9de977;
+      transition: background-color linear .1s;
+      &:hover{
+        background-color: color.adjust(#9de977, $lightness: 10%);  
       }
     }
-    &_upload{
-      button{
-        background-color: #779ce9;
-        transition: background-color linear .1s;
-        &:hover{
-          background-color: color.adjust(#779ce9, $lightness: 10%);  
-        }
-      }
-    }
-    &_download{
-      button{
-        background-color: #9de977;
-        transition: background-color linear .1s;
-        &:hover{
-          background-color: color.adjust(#9de977, $lightness: 10%);  
-        }
+  }
+  &_upload{
+    width: 100%;
+    button{
+      background-color: #779ce9;
+      transition: background-color linear .1s;
+      &:hover{
+        background-color: color.adjust(#779ce9, $lightness: 10%);  
       }
     }
   }

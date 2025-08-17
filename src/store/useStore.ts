@@ -24,6 +24,7 @@ type MachinesFormValues = {
 };
 
 type StorePricesFormValues = {
+  name: string
   physical_unit: string
   amount: number
   amount_unit: string
@@ -53,6 +54,8 @@ type StoreState = {
   productSelectionForm: ProductSelectionFormValues[]
   downloadCurrentCart: () => void
   uploadCart: (file: File) => void
+  downloadCurrentStorePrices: () => void
+  uploadStorePrices: (file: File) => void
   setOptions: (option: keyof StoreState["options"], newValue: string) => void
   setCart: (newCart: CartItem[]) => void
   setCartQuantityProduced: (newValue: number) => void
@@ -117,7 +120,8 @@ export const useStore = create<StoreState>()(
             time_unit: ""
           }))
         },
-        storePricesForm: productsJson.map(()=>({
+        storePricesForm: productsJson.map((p)=>({
+          name: p.name,
           physical_unit: "",
           amount: 0,
           amount_unit: "",
@@ -132,6 +136,48 @@ export const useStore = create<StoreState>()(
           set(() => ({
             cart: newCart
           }))
+        },
+
+        uploadStorePrices: (file: File) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const text = e.target?.result as string;
+              const json: StorePricesFormValues[] = JSON.parse(text);
+              const newArray = get().storePricesForm.map( p => {
+                return json.find( e => e.name === p.name) || p
+              } )
+              set(() => ({
+                storePricesForm: newArray
+              }));
+              toast("Store Prices uploaded correctly.", {
+                type: "success",
+                autoClose: 2000,
+                position: "bottom-right"
+              });
+            } catch (error) {
+              console.error("Error al leer el archivo JSON:", error);
+              toast("Error al leer el archivo JSON", {
+                type: "error",
+                autoClose: 2000,
+                position: "bottom-right"
+              });
+            }
+          };
+          reader.readAsText(file);
+        },
+
+        downloadCurrentStorePrices() {
+          const dataStr = JSON.stringify(get().storePricesForm, null, 2); // convertir object a texto JSON con formato
+          const blob = new Blob([dataStr], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "datos.json"; // nombre del archivo
+          link.click();
+
+          URL.revokeObjectURL(url); // limpiar memoria
         },
 
         uploadCart: (file: File) => {
@@ -350,6 +396,40 @@ export const useStore = create<StoreState>()(
       }),
       {
         name: "mi-ganancia-storage",
+        version: 2,
+        migrate: (persistedState, version) => {
+          if (version < 2) {
+            return {
+              cart: [],
+              cartMultiplier: 1,
+              cartQuantityProduced: 0,
+              cartSellingPricePerUnit: 0,
+              options: { currency: "", currencySymbol: "" },
+              machinesForm: {
+                electricity_price: 6.4031,
+                electricity_unit: "kWh",
+                machines: machinesJson.map(() => ({
+                  power_consumption: 0,
+                  power_unit: "",
+                  time: 0,
+                  time_unit: ""
+                }))
+              },
+              storePricesForm: productsJson.map((p) => ({
+                name: p.name,
+                physical_unit: "",
+                amount: 0,
+                amount_unit: "",
+                price: 0,
+              })),
+              productSelectionForm: productsJson.map(() => ({
+                amount: 0,
+                amount_unit: "",
+              })),
+            } as unknown as StoreState
+          }
+          return persistedState as StoreState
+        }
         // storage: createJSONStorage(()=>sessionStorage),
         //storage: createJSONStorage(()=>localStorage),
       }
