@@ -62,7 +62,7 @@ export default function Cart({} : CartProps) {
             <div className="content_cart_items_section_multiplier">
               <h3>Multiplier</h3>
               <input
-                type="text"
+                type="number"
                 value={getDisplayAmount(cartMultiplier)}
                 onChange={(e)=>{setCartMultiplier(stringToNumberWithoutEmpty(e.target.value))}}  
               />
