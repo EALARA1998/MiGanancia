@@ -1,14 +1,14 @@
+import type { CartItem, CartItemDraft, CartMachineDraft, Machine, Products, Units } from "../types";
+import { Convert } from '../helpers/unitConversions';
+import { create } from "zustand";
+import { devtools, persist } from 'zustand/middleware';
+import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { create } from "zustand";
 import productsJson from "../data/products.json";
 import unitsJson from "../data/units.json";
 import machinesJson from "../data/machines.json";
 import currencyCode from "currency-codes";
-import { devtools, persist } from 'zustand/middleware';
-import { v4 as uuidv4 } from 'uuid';
-import type { CartItem, CartItemDraft, CartMachineDraft, Machine, Products, Units } from "../types";
-import { Convert } from '../helpers/unitConversions';
 
 type MachineData = {
   power_consumption: number;
@@ -107,7 +107,7 @@ export const useStore = create<StoreState>()(
         cartMultiplier: 1,
         cartQuantityProduced: 0,
         cartSellingPricePerUnit: 0,
-        products: productsJson,
+        products: productsJson.sort((a,b) => a.name.localeCompare(b.name)),
         units: unitsJson,
         machines: machinesJson,
         machinesForm: {

@@ -202,5 +202,41 @@
     "name": "Cacao",
     "img": "cacao.png",
     "physical_units": ["mass"]
+  },
+  {
+    "id": 35,
+    "name": "Basil",
+    "img": "basil.png",
+    "physical_units": ["mass"]
+  },
+  {
+    "id": 36,
+    "name": "Mozzarella",
+    "img": "mozzarella.png",
+    "physical_units": ["mass"]
+  },
+  {
+    "id": 37,
+    "name": "Olive Oil",
+    "img": "olive_oil.png",
+    "physical_units": ["mass","volume"]
+  },
+  {
+    "id": 38,
+    "name": "Oregano",
+    "img": "oregano.png",
+    "physical_units": ["mass"]
+  },
+  {
+    "id": 39,
+    "name": "Salami",
+    "img": "salami.png",
+    "physical_units": ["mass"]
+  },
+  {
+    "id": 40,
+    "name": "tomato",
+    "img": "tomato.png",
+    "physical_units": ["mass","unit"]
   }
 ]
