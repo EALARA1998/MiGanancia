@@ -1,5 +1,4 @@
 import getSymbolFromCurrency from "currency-symbol-map";
-import { useEffect } from "react"
 import { useStore } from "../store/useStore";
 
 export default function Home() {
@@ -7,10 +6,6 @@ export default function Home() {
   const { iso4217Data, options, setOptions } = useStore()
 
   const iso4217DataSorted = iso4217Data.data.sort((a,b) => a.currency.localeCompare(b.currency))
-
-  useEffect(()=>{
-    console.log( iso4217DataSorted)
-  },[])
 
   return (
     <>
